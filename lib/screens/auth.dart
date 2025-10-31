@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
-class AuthScreen extends StatelessWidget {
+class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
+
+  @override
+  State<AuthScreen> createState() => _AuthScreenState();
+}
+
+class _AuthScreenState extends State<AuthScreen> {
+  bool _isLogin = true;
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +35,43 @@ class AuthScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           TextFormField(
-                            decoration: InputDecoration(labelText: "email"),
+                            decoration: const InputDecoration(
+                              labelText: 'Email Address',
+                            ),
+                            keyboardType: TextInputType.emailAddress,
+                            autocorrect: false,
+                            textCapitalization: TextCapitalization.none,
                           ),
                           TextFormField(
-                            decoration: InputDecoration(labelText: "password"),
+                            decoration: const InputDecoration(
+                              labelText: 'Password',
+                            ),
+                            obscureText: true,
+                          ),
+                          const SizedBox(height: 12),
+                          ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  Theme.of(
+                                    context,
+                                  ).colorScheme.primaryContainer,
+                              shadowColor: Colors.blueAccent,
+                            ),
+                            child: Text(_isLogin ? 'Login' : 'Signup'),
+                          ),
+                          const SizedBox(height: 12),
+                          TextButton(
+                            onPressed: () {
+                              setState(() {
+                                _isLogin = !_isLogin;
+                              });
+                            },
+                            child: Text(
+                              _isLogin
+                                  ? 'Create an account'
+                                  : 'I already have an account',
+                            ),
                           ),
                         ],
                       ),
